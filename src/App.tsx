@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Column, Container, Row } from "./styled/Containers";
+import { DrawingAction, DrawingArea } from "./components/DrawingArea";
+import { ColorSet } from "./components/ColorSet";
+import { ActionSet } from "./components/ActionSet";
 
 function App() {
+  const [color, setColor] = React.useState<string>("#000000");
+  const [drawingAction, setDrawingAction] = React.useState<DrawingAction>(
+    DrawingAction.POINT,
+  );
+  const onColorChange = (color: string) => {
+    setColor(color);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Row>
+        <DrawingArea color={color} drawingAction={drawingAction} />
+        <Column>
+          <ColorSet color={color} onColorChange={onColorChange} />
+          <ActionSet
+            undo={() => {
+              console.log("undo");
+            }}
+            redo={() => {
+              console.log("redo");
+            }}
+            onDrawingActionChange={(newDrawingAction: DrawingAction) =>
+              setDrawingAction(newDrawingAction)
+            }
+          />
+        </Column>
+      </Row>
+    </Container>
   );
 }
 
