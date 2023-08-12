@@ -1,23 +1,25 @@
-import React from "react";
-import { DrawingAction } from "./DrawingArea";
+import React, { memo } from "react";
 import { Row } from "../styled/Containers";
+import { DrawingAction } from "../utils/drawing.action";
 import { SquareButton, SquareButtonIcon } from "../styled/Input";
 
 interface IActionSetProps {
   onDrawingActionChange: (newDrawingAction: DrawingAction) => void;
   undo: () => void;
   redo: () => void;
+  clear: () => void;
 }
-export const ActionSet = ({
+const ActionSetComponent = ({
   onDrawingActionChange,
   undo,
   redo,
+  clear,
 }: IActionSetProps) => {
   return (
     <Row>
       <SquareButton
         size={32}
-        onClick={() => onDrawingActionChange(DrawingAction.POINT)}
+        onClick={() => onDrawingActionChange(DrawingAction.TRACE)}
       >
         <SquareButtonIcon src={require("../assets/point.png")} />
       </SquareButton>
@@ -45,6 +47,11 @@ export const ActionSet = ({
       <SquareButton size={32} onClick={redo}>
         <SquareButtonIcon src={require("../assets/redo.png")} />
       </SquareButton>
+      <SquareButton size={32} onClick={clear}>
+        <SquareButtonIcon src={require("../assets/trash.png")} />
+      </SquareButton>
     </Row>
   );
 };
+
+export const ActionSet = memo(ActionSetComponent);

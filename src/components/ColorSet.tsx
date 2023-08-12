@@ -1,12 +1,12 @@
-import React from "react";
-import { Color, ColorChangeHandler, SketchPicker } from "react-color";
+import React, { memo } from "react";
+import { Color, SketchPicker } from "react-color";
 import { Row } from "../styled/Containers";
 
 interface IColorSetProps {
   color: Color;
   onColorChange: (color: string) => void;
 }
-export const ColorSet = ({ color, onColorChange }: IColorSetProps) => {
+export const ColorSetComponent = ({ color, onColorChange }: IColorSetProps) => {
   return (
     <Row>
       <SketchPicker
@@ -16,3 +16,5 @@ export const ColorSet = ({ color, onColorChange }: IColorSetProps) => {
     </Row>
   );
 };
+
+export const ColorSet = memo(ColorSetComponent);

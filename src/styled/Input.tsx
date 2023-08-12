@@ -16,3 +16,12 @@ export const SquareButtonIcon = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+export const SizeSelector = styled.input`
+  width: fit-content;
+  max-width: 40px;
+  height: fit-content;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+`;
